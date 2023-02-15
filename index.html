@@ -417,12 +417,39 @@
             confirmButtonText: 'ok'
           })
         } else {
-          axios.post("https://getform.io/f/0d54667d-b911-4dcf-a336-07cf0e5aa7cd", formData).then(response => Swal.fire({
-            title: 'Success!',
-            text: 'E-mail successfully sent',
-            icon: 'success',
-            confirmButtonText: 'OK'
-          })).catch(error => console.log(error))
+
+axios.post(
+    'https://api.sendgrid.com/v3/mail/send',
+    // '{"personalizations": [{"to": [{"email": "test@example.com"}]}],"from": {"email": "test@example.com"},"subject": "Sending with SendGrid is Fun","content": [{"type": "text/plain", "value": "and easy to do anywhere, even with cURL"}]}',
+    {
+        'personalizations': [
+            {
+                'to': [
+                    {
+                        'email': 'test@example.com'
+                    }
+                ]
+            }
+        ],
+        'from': {
+            'email': 'test@example.com'
+        },
+        'subject': 'Sending with SendGrid is Fun',
+        'content': [
+            {
+                'type': 'text/plain',
+                'value': 'and easy to do anywhere, even with cURL'
+            }
+        ]
+    },
+    {
+        headers: {
+            'Authorization': 'Bearer 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',
+            'Content-Type': 'application/json'
+        }
+    }
+
+         
         }
       }
     </script>
